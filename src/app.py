@@ -18,7 +18,8 @@ from src.rag.file_loader import Loader
 # from src.rag.extractor import Extractor
 
 
-llm = get_llm("gpt-4o", temperature=0.3)
+# llm = get_llm("gpt-4o", temperature=0.3)
+llm = get_llm("deepseek-chat", temperature=0.3)
 
 genai_docs = "./data_source/generative_ai"
 

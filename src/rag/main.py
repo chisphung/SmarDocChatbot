@@ -6,6 +6,7 @@ from src.chat.output_parser import Str_OutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from src.rag.file_loader import Loader
 from src.rag.vectorstore import VectorDB
+from chromaviz import visualize_collection
 from src.rag.offline_rag import Offline_RAG
 
 
@@ -54,6 +55,8 @@ def build_rag_chain(llm, data_dir):
     # print("______________________________________________")
     # print(f"Type of doc_loaded: {type(doc_loaded)}")
     retriever = VectorDB(documents = doc_loaded).get_retriever()
+    collection = VectorDB(documents=doc_loaded).get_collection()
+    # visualize_collection(collection)
     # retriever = EnhancedVectorDB(documents=doc_loaded).get_retriever()
     rag_chain = Offline_RAG(llm).get_chain(retriever, history_folder="./chat_history", max_history_length=6)
     return rag_chain

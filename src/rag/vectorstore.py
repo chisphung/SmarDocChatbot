@@ -13,10 +13,14 @@ class VectorDB:
         self.vector_db_class = vector_db_class
         self.embedding = embedding
         self.db = self._build_db(documents)
+        self.collection = self.db._collection
 
     def _build_db(self, documents):
         return self.vector_db_class.from_documents(documents=documents, embedding=self.embedding)
 
     def get_retriever(self, search_type="similarity", search_kwargs={"k": 10}):
         return self.db.as_retriever(search_type=search_type, search_kwargs=search_kwargs)
+    
+    def get_collection(self):
+        return self.collection
 
